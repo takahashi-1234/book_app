@@ -1,0 +1,24 @@
+  <table class="table table-hover">
+    <thead>
+      <td>id</td>
+      <td>title</td>
+      <td>author</td>
+      <td><%= sort_link(q,:created_at) %></td>
+    </thead>
+    <% books.each do |book| %>
+    <tr>
+      <td><%= book.id %></td>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.created_at.strftime('%Y/%m/%d') %></td>
+      <td>
+        <% if book.favorite(current_user) %>
+          <%= link_to book_favorite_path(book.id,book.favorites.ids),method: :delete do %><i class="fas fa-heart"></i><% end %>
+        <% else %>
+          <%= link_to book_favorites_path(book.id),method: :post do %><i class="far fa-heart"></i><% end %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate books %>

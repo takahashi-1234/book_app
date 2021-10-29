@@ -1,0 +1,5 @@
+
+<%= search_form_for @q do |f|%>
+  <p>期間:<%= f.search_field:created_at_gteq %>~<%= f.search_field:created_at_lteq %><%= f.submit "検索"%></p>
+<% end %>
+<%= render "books/books",books:@books,q:@q %>
